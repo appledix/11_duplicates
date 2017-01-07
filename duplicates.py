@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import argparse
+import collections
 import os
 
 
@@ -19,14 +20,12 @@ def output_duplicates_to_terminal(duplicates):
             print(" • {}".format(file_location))
 
 def get_all_files(directory):
-    file_locations = {}
+    file_locations = collections.defaultdict(list)
     for rootdir, dirs, file_names, in os.walk(directory):
         for file_name in file_names:
             path_to_current_file = os.path.join(rootdir, file_name)
             file_size = os.path.getsize(path_to_current_file)
             file_data = (file_name, file_size)
-            if file_data not in file_locations:
-                file_locations[file_data] = []
             file_locations[file_data].append(path_to_current_file)
     return file_locations
 
