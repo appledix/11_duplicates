@@ -15,20 +15,20 @@ def output_duplicates_to_terminal(duplicates):
     print("Found {} duplicate(s)!".format(num_of_duplicates))
     for i, (file_name, file_size) in enumerate(duplicates, start=1):
         print("{}) File name: {}\nAppearances:".format(i, file_name))
-        for appearance in duplicates[(file_name, file_size)]:
-            print(" • {}".format(appearance))
+        for file_location in duplicates[(file_name, file_size)]:
+            print(" • {}".format(file_location))
 
 def get_all_files(directory):
-    all_files = {}
+    file_locations = {}
     for rootdir, dirs, file_names, in os.walk(directory):
         for file_name in file_names:
             path_to_current_file = os.path.join(rootdir, file_name)
             file_size = os.path.getsize(path_to_current_file)
             file_data = (file_name, file_size)
-            if file_data not in all_files:
-                all_files[file_data] = []
-            all_files[file_data].append(path_to_current_file)
-    return all_files
+            if file_data not in file_locations:
+                file_locations[file_data] = []
+            file_locations[file_data].append(path_to_current_file)
+    return file_locations
 
 def get_duplicates(files):
     duplicates = {}
