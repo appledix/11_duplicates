@@ -25,8 +25,7 @@ def get_all_files(directory):
         for file_name in file_names:
             path_to_current_file = os.path.join(rootdir, file_name)
             file_size = os.path.getsize(path_to_current_file)
-            file_data = (file_name, file_size)
-            file_locations[file_data].append(path_to_current_file)
+            file_locations[(file_name, file_size)].append(path_to_current_file)
     return file_locations
 
 def get_duplicates(files):
