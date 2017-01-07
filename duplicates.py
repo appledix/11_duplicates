@@ -30,13 +30,8 @@ def get_all_files(directory):
     return file_locations
 
 def get_duplicates(files):
-    duplicates = {}
-    for file_data in files:
-        file_appearances = files[file_data]
-        if len(file_appearances) > 1:
-            duplicates[file_data] = file_appearances
-    return duplicates
-    
+    return {f_data:files[f_data] for f_data in files if len(files[f_data]) > 1}
+
 
 def main():
     directory = get_dir_from_terminal()
